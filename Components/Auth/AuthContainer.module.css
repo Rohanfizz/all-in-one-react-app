@@ -1,0 +1,18 @@
+.container {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:2rem;
+	padding: 3rem;
+    padding-bottom:2rem;
+    width: 80rem;
+    height: 30rem;
+    background-color: #0A1929;
+    position: relative;
+    top: calc((100% - 30rem)/2);
+    left: calc((100% - 80rem)/2);    
+}
+.container>h1{
+    position: absolute;
+    top:1rem;
+}

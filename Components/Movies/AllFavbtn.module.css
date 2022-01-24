@@ -1,0 +1,33 @@
+.container{
+    position: relative;
+    top:2rem;
+}
+.container button{
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border: none;
+    width:50%;
+    height: 45px;
+    line-height: 45px;
+    background-color: transparent;
+    border-bottom: 1px solid #0070f3;;
+    color: white;
+    font-weight: 400;
+    font-size: 16px;
+    transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+    font-size:1.5rem;
+    
+}
+button.selected{
+    box-shadow: 0 4px 14px 0 rgb(0 118 255 / 40%);
+    background-color: rgba(0,118,255,0.9);
+}
+.container button.selected:hover{
+    box-shadow: 0 4px 14px 0 rgb(0 118 255 / 40%);
+    background-color: rgba(0,118,255,0.9);
+}
+.container button:hover{
+    background: rgba(1, 52, 110, 0.9);
+    box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
+}

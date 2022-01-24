@@ -1,0 +1,13 @@
+.container{
+    background-color: #0A1929;
+    width: 100%;
+    min-height: 5rem;
+    position: relative;
+    top: 4rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap:1rem;
+    padding: 2rem;
+}
