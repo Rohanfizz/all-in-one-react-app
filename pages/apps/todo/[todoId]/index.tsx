@@ -25,4 +25,12 @@ const TodosItemDisplay: React.FC = (props) => {
 		</Card>
 	);
 };
+export async function getStaticPaths() {
+	
+
+	return {
+		fallback: true,
+	};
+}
+
 export default TodosItemDisplay;
