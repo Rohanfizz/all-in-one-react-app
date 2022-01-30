@@ -10,28 +10,28 @@ const TodosItemDisplay: React.FC = (props) => {
 	const todosArray = useSelector(
 		(state: RootStateOrAny) => state.todo.todoItems
 	);
-	console.log(todosArray);
+	const item = todosArray.find(
+		(item: TodoObj) => item.id === router.query.todoId
+	);
+	const content = item ? item.content : "404 not found";
 
 	// return <p style={{margin: '0'}}>{router.query.todoId}</p>
 	return (
 		<Card className={classes.container}>
-			<h1>
-				{
-					todosArray.find(
-						(item: TodoObj) => item.id === router.query.todoId
-					).content
-				}
-			</h1>
+			<h1>{content}</h1>
 		</Card>
 	);
 };
 export async function getStaticPaths() {
-	
-
 	return {
-		fallback: true,
 		paths: [],
+		fallback: true, // false or 'blocking'
 	};
 }
 
+export async function getStaticProps(context: any) {
+	return {
+		props: {},
+	};
+}
 export default TodosItemDisplay;
