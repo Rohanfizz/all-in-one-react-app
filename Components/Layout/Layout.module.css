@@ -1,8 +1,10 @@
 .main{
     background-color: #2B2B2B;
     height: calc(100vh - 5rem);
-    padding-left:20rem;
-    padding-right:20rem;
+    padding-left:min(15rem,20%);
+    padding-right:min(15rem,20%);
+    /* padding-left:min(20rem,50%);
+    padding-right:min(20rem,50%); */
     margin:0;
 
 }
