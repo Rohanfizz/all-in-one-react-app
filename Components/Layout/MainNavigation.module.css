@@ -1,52 +1,72 @@
 .header {
-    width: 100%;
-    height: 5rem;
-    padding: 0 5%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color:white;
-    background-color: #121212;
+	width: 100%;
+	height: 5rem;
+	padding: 0 5%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: white;
+	background-color: #121212;
 }
-.header nav{
-    width: 60%;
+.header nav {
+	width: 60%;
 }
-.header>nav>ul{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap:4rem;
-    display:flex;
-    justify-content:flex-end;
-    align-items: center;
-    width: 100%;
-    font-size: 1.7rem;
+.header > nav > ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	gap: 4rem;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	font-size: 1.7rem;
 }
-.dropdownIcon{
-    transform: scale(2);
-    cursor:pointer;
+.dropdownIcon {
+	transform: scale(2);
+	cursor: pointer;
 }
-.dropdown-menu{
-    position: absolute;
-    z-index: 9999;
-    left:80%;
-    top:10%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content:center;
-    background-color: white;
-    width: 17%;
-    height: 10rem;
-    padding:0;
+.dropdown-menu {
+	position: absolute;
+	z-index: 9999;
+	left: 80%;
+	top: 10%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
+	width: 17%;
+	height: 10rem;
+	padding: 0;
 }
-.dropdown-menu ul{
-    list-style-type: none;
-    text-align: center;
+.dropdown-menu ul {
+	list-style-type: none;
+	text-align: center;
 }
-.dropdown-menu li{
-    margin-top: 1rem;
+.dropdown-menu li {
+	margin-top: 1rem;
 }
-.dropdown-menu *{
-    color:#0A1929;
+.dropdown-menu * {
+	color: #0a1929;
+}
+.loginBtn {
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 600;
+	border-radius: 8px;
+	padding: 14px 24px;
+	border: none;
+	transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s,
+		-webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
+	background: linear-gradient(
+		to right,
+		rgb(230, 30, 77) 0%,
+		rgb(227, 28, 95) 50%,
+		rgb(215, 4, 102) 100%
+	);
+	color: #fff;
 }

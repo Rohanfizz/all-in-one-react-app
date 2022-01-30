@@ -5,7 +5,9 @@ class MovieObj {
     releaseDate: string;
     description: string;
     isFav:boolean;
-    constructor(title:string,director:string,producer:string,releaseDate:string,description:string,isFav:boolean){
+    id:string;
+    constructor(id:string,title:string,director:string,producer:string,releaseDate:string,description:string,isFav:boolean){
+        this.id = id;
         this.title = title;
         this.director = director;
         this.producer= producer;

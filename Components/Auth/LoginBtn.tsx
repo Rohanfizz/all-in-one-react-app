@@ -6,8 +6,10 @@ import LockOpenOutlinedIcon from "@material-ui/icons/LockOpenOutlined";
 const LoginBtn: React.FC = (props) => {
 	return (
 		<Card className={classes.container}>
-			<LockOpenOutlinedIcon style={{transform : 'scale(2)'}}/>
-			<h1><Link href="/auth/login">Login</Link></h1>
+			<LockOpenOutlinedIcon style={{ transform: "scale(2)" }} />
+			<h1>
+				<Link href="/auth/login">Login</Link>
+			</h1>
 		</Card>
 	);
 };

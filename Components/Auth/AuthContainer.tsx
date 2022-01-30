@@ -5,11 +5,12 @@ import LogoutBtn from "../../Components/Auth/LogoutBtn";
 import SignupButton from "../../Components/Auth/SignupBtn";
 import Card from "../../Components/Ui/Card";
 import classes from "./AuthContainer.module.css";
-import {useSelector} from 'react-redux';
+import { useSelector, RootStateOrAny } from "react-redux";
 
 const AuthContainer: React.FC = (props) => {
-	const isLoggedIn = useSelector((state)=> state.auth.isLoggedIn);	//correct hai
-	
+	const isLoggedIn = useSelector(
+		(state: RootStateOrAny) => state.auth.isLoggedIn
+	);
 	return (
 		<Card className={classes.container}>
 			<h1>Authorization</h1>

@@ -2,10 +2,17 @@ import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/auth-slice";
 
+const emailConverter = (mail: string) => {
+	const a = mail.replace("@", "");
+	const b = a.replace(".", "");
+
+	return b;
+};
+
 const useLoginSignup = () => {
 	//used for login and signup only, both are post requests
 	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState(false);
+	const [error, setError] = useState(null);
 	const dispatch = useDispatch();
 
 	const sendRequest = useCallback(
@@ -18,7 +25,8 @@ const useLoginSignup = () => {
 			};
 		}) => {
 			setIsLoading(true);
-			setError(false);
+			setError(null);
+
 			let url: string = "";
 			if (requestConfig.type === "login") {
 				url =
@@ -27,6 +35,7 @@ const useLoginSignup = () => {
 				url =
 					"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC23KyHp6FpseENY1kFLwZMs8XImN0EV6w";
 			}
+
 			try {
 				const response = await fetch(url, {
 					method: "POST",
@@ -35,10 +44,8 @@ const useLoginSignup = () => {
 				});
 
 				const data = await response.json();
-				console.log(data);
 
 				if (!response.ok) {
-					setError(true);
 					throw new Error("Something went wrong!");
 				}
 
@@ -46,13 +53,15 @@ const useLoginSignup = () => {
 					authActions.login({
 						token: data.idToken,
 						email: data.email,
-						expirationTime: data.expiresIn
+						expirationTime: data.expiresIn,
 					})
 				);
-
 			} catch (error: any) {
-				alert(error.message);
+				
+				alert("Please enter valid credentials!");
+				return false;
 			}
+			return true;
 		},
 		[]
 	);

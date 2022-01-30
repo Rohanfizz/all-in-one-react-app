@@ -1,9 +1,17 @@
 import React from "react";
+import {useDispatch} from 'react-redux';
 import useAuthForm from "../../hooks/use-auth-form";
+import { todoActions } from "../../store/todo-slice";	
 import Card from "../Ui/Card";
 import classes from "./NewTodo.module.css";
+import TodoObj from "../../models/todo";
 
-const NewTodo: React.FC<{ onAddTodo: (content: string) => void }> = (props) => {
+import ShortUniqueId from "short-unique-id";
+
+const NewTodo: React.FC = (props) => {
+	const dispatch = useDispatch();
+
+	const uid = new ShortUniqueId({ length: 10 });
 	const {
 		value: enteredTodo,
 		onChangeHandler: todoonChangeHandler,
@@ -11,15 +19,19 @@ const NewTodo: React.FC<{ onAddTodo: (content: string) => void }> = (props) => {
 		valueIsValid: todoIsValid,
 	} = useAuthForm((content: string) => content.length > 0);
 
-	const onClickHandler = (e: React.MouseEvent) => {
-		props.onAddTodo(enteredTodo);
+	const onAddTodo= (event: React.MouseEvent<HTMLButtonElement>) => {
+		const content = enteredTodo;
+		if (!content.length) return;
+		// const newTodo = { id: uid(), content: content };
+		const newTodo = new TodoObj(uid(),content);
+		dispatch(todoActions.addTodo(newTodo));
 		todoReset();
 	};
 
 	return (
 		<Card className={classes.container}>
-			<input type="text" onChange={todoonChangeHandler} />
-			<button onClick={onClickHandler} disabled={!todoIsValid}>Add Task</button>
+			<input type="text" onChange={todoonChangeHandler} value={enteredTodo}/>
+			<button onClick={onAddTodo} disabled={!todoIsValid}>Add Task</button>
 		</Card>
 	);
 };

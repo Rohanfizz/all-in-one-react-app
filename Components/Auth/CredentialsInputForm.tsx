@@ -2,8 +2,10 @@ import React from "react";
 import useAuthForm from "../../hooks/use-auth-form";
 import classes from "./CredentialsInputForm.module.css";
 import useLoginSignup from "../../hooks/useLoginSignup";
+import { useRouter } from "next/router";
 
 const CredentialsInputForm: React.FC<{ query: string }> = (props) => {
+	const router = useRouter();
 	const emailValidation = (email: string) => {
 		return String(email)
 			.toLowerCase()
@@ -40,7 +42,7 @@ const CredentialsInputForm: React.FC<{ query: string }> = (props) => {
 
 	const onSubmitHandler = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
-		await sendRequest({
+		const done = await sendRequest({
 			type: props.query,
 			body: {
 				email: emailValue,
@@ -48,6 +50,8 @@ const CredentialsInputForm: React.FC<{ query: string }> = (props) => {
 				returnSecureToken: true,
 			},
 		});
+		// console.log(error);
+		if(done)router.push("/");
 	};
 
 	return (

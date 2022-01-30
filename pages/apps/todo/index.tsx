@@ -2,24 +2,44 @@ import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
 import NewTodo from "../../../Components/Todo/NewTodo";
 import TodoItem from "../../../Components/Todo/TodoItem";
 import TodoObj from "../../../models/todo";
-import ShortUniqueId from "short-unique-id";
-import { todoActions } from "../../../store/todo-slice";
+import { useEffect } from "react";
+import { fetchTodoData, sendTodos } from "../../../store/todo-actions";
+import ReactLoading from 'react-loading';
+import { useRouter } from "next/router";
 
-const Todos: React.FC = (props) => {
+let isInitial = true;
+
+const Todos: React.FC = () => {
+	const router = useRouter();
 	const dispatch = useDispatch();
-	const todoItems: TodoObj[] = useSelector(
-		(state: RootStateOrAny) => state.todo.todoItems
+	const email = useSelector((state: RootStateOrAny) => state.auth.email);
+	const todoSlice: { todoItems: TodoObj[]; changed: boolean } = useSelector(
+		(state: RootStateOrAny) => state.todo
 	);
-	const uid = new ShortUniqueId({ length: 10 });
+	const isLoading = useSelector((state:RootStateOrAny) => state.ui.isLoading);
 
-	const onAddTodo = (content: string) => {
-		if (!content.length) return;
-		const newTodo = new TodoObj(uid(), content);
-		dispatch(todoActions.addTodo(newTodo));
-	};
-	const onDeleteTodo = (id: string) => {
-		dispatch(todoActions.deleteTodo(id));
-	};
+	
+	useEffect(() => {
+		if(!email){
+			router.replace('/auth');
+		}
+	},[]);
+
+
+	useEffect(() => {
+		dispatch(fetchTodoData(email));
+		
+	}, []);
+
+	useEffect(() => {
+		if (isInitial) {
+			isInitial = false;
+			return;
+		}
+		if (todoSlice.changed) {
+			dispatch(sendTodos(todoSlice.todoItems, email));
+		}
+	}, [todoSlice]);
 
 	return (
 		<div
@@ -29,11 +49,13 @@ const Todos: React.FC = (props) => {
 				flexDirection: "column",
 			}}
 		>
-			<NewTodo onAddTodo={onAddTodo} />
-			{todoItems.map((todo) => {
-				return <TodoItem key={todo.id} item={todo} onDeleteTodo={onDeleteTodo} />;
+			<NewTodo />
+			{isLoading && <ReactLoading type={'cylon'} color={'white'} width="20%" />}
+			{todoSlice.todoItems.map((todo) => {
+				return <TodoItem key={todo.id} item={todo} />;
 			})}
 		</div>
 	);
 };
+
 export default Todos;
